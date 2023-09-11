@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const routes = require('./src/routes')
+
 const app = express()
 require("dotenv").config();
 const port = process.env.PORT
@@ -24,6 +26,8 @@ const connection = mongoose.connection;
 connection.once('open', () => {
     console.log('MongoDB Atlas connection established successfully!');
 });
+
+app.use("/api/v1/", routes)
 
 app.get('/', (req, res) => {
     res.send('Home')
