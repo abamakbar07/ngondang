@@ -3,9 +3,9 @@ const express = require("express")
 // const { test } = require("../controllers/testControllers")
 const router = express.Router()
 
-// const { addUser, loginUser, checkAuth } = require("../controllers/userControllers")
+const { addUser } = require("../controllers/clientControllers")
 
-// router.post("/add-user", addUser)
+router.post("/add-user", addUser)
 // router.post("/login-user", loginUser)
 // router.get("/check-auth", loginAuth, checkAuth)
 

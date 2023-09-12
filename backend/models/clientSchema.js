@@ -11,6 +11,6 @@ const clientSchema = new Schema({
   verifiedToken: String,
 });
 
-const Client = mongoose.model("client", clientSchema);
+const ClientModel = mongoose.model("client", clientSchema);
 
-exports.default = Client;
+exports.default = ClientModel;

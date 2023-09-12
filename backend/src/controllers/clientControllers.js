@@ -2,7 +2,7 @@ const { sign } = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 
-const { default: Client } = require("../../models/clientSchema");
+const { default: ClientModel } = require("../../models/clientSchema");
 // "fullname"  : String,
 // "nickname"  : String,
 // "email"     : String,
@@ -25,18 +25,18 @@ exports.addUser = async (req, res) => {
           message: error.details[0].message,
         });
   
-      const checkData = await Client.findOne({ email }, "email").exec();
+      const checkData = await ClientModel.findOne({ email }, "email").exec();
   
       if (checkData) {
         return res.status(400).send({
           status: "Failed",
-          message: `Email already exsited`,
+          message: `Email ${email} already exsited`,
         });
       }
   
       const hashedPassword = await bcrypt.hash(password, 10);
   
-      const user = await Client.create({
+      const user = await ClientModel.create({
         fullname,
         email,
         verifiedStatus: false,
@@ -44,7 +44,7 @@ exports.addUser = async (req, res) => {
         password: hashedPassword,
       });
   
-      const result = await Client(user).save();
+      const result = await ClientModel(user).save();
   
       res.send({
         status: "Success!",
