@@ -59,3 +59,44 @@ exports.addUser = async (req, res) => {
       });
     }
   };
+
+exports.loginUser = async (req, res) => {
+    try {
+      const { email, password } = req.body;
+  
+      const user = await ClientModel.findOne(
+        { email },
+        "email fullname password"
+      ).exec();
+  
+      if (!user)
+        return res.status(400).send({
+          message: "Your Credentials is not valid",
+        });
+
+        const validPass = await bcrypt.compare(password, user.password);
+  
+      if (!validPass)
+        return res.status(400).send({
+          message: "Your Credentials is not valid",
+        });
+  
+      const secretKey = process.env.SECRETKEY;
+      const token = sign({ email }, secretKey);
+  
+      res.send({
+        status: "Success!",
+        message: "Login success!",
+        user: {
+          email: user.email,
+          fullname: user.fullname,
+        },
+        token,
+      });
+    } catch (error) {
+      res.status(500).send({
+        status: "Failed",
+        error,
+      });
+    }
+  };

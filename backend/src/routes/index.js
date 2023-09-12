@@ -3,10 +3,10 @@ const express = require("express")
 // const { test } = require("../controllers/testControllers")
 const router = express.Router()
 
-const { addUser } = require("../controllers/clientControllers")
+const { addUser, loginUser } = require("../controllers/clientControllers")
 
 router.post("/add-user", addUser)
-// router.post("/login-user", loginUser)
+router.post("/login-user", loginUser)
 // router.get("/check-auth", loginAuth, checkAuth)
 
 // router.post("/test", test)
