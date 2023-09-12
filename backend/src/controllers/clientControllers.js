@@ -18,6 +18,7 @@ exports.addUser = async (req, res) => {
         password: Joi.string().min(4).required(),
         verifiedStatus: false,
       });
+      
       const { error } = schema.validate(req.body);
   
       if (error)
