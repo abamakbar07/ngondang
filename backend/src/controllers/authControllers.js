@@ -19,7 +19,7 @@ exports.loginAuth = (req, res, next) => {
         const verified = jwt.verify(token, secretKey);
 
         (req.jwt = verified),
-        console.log("hasil req verified in auth", verified.email);
+        // console.log("hasil req verified in auth", verified.email);
 
         next();
 
@@ -33,7 +33,7 @@ exports.loginAuth = (req, res, next) => {
 exports.checkAuth = async (req, res) => {
     try {
       const email = req.jwt.email;
-      console.log(email);
+    //   console.log(email);
   
       const result = await ClientModel.findOne({ email }, "-_id -password").exec();
   
