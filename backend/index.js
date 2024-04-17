@@ -7,7 +7,7 @@ const routes = require('./src/routes')
 
 const app = express()
 require("dotenv").config();
-const port = process.env.PORT
+const port = process.env.PORT || 5000
 const dbatlas = process.env.DBATLAS
 
 // Middleware
